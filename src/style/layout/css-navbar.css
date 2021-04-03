@@ -3,6 +3,7 @@
     width: 200px; 
     height: 100vh; 
     background-color: #f4f4f4;
+    border-right: 1px solid #ccc;
 }
 
 /* Phan logo */
@@ -49,12 +50,13 @@
     width: 100%; 
     height: 44px;
     font-family: GoogleSans-Regular;
-    font-size: 12.8px;
+    font-size: 12.7px;
     padding: 12px 30px 12px 12px;
     display: flex; 
     cursor: pointer;
     outline: none;
     border: none;
+    background-color: #f4f4f4;
     
 }
 
