@@ -104,5 +104,11 @@
 }
 
 
+/* Router CSS */
+
+router-link{
+    display: flex;
+}
+
 
 

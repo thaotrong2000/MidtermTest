@@ -34,6 +34,7 @@
 
       <button id="content-navbar-reload"></button>
     </div>
+    <!-- Content Table -->
 
     <div id="table">
       <table id="content-table">
@@ -680,7 +681,33 @@
       </table>
     </div>
 
-    <!-- Content Table -->
+    <!-- Tao footer -->
+    <div id="footer">
+      <div id="footer-title">Hiển thị <span class="footer-title-numberlist">1-10/10000</span> nhân viên</div>
+      
+      <div id="footer-paging">
+        <!-- Tro ve trang truoc -->
+        <div class="icon-pre-page">
+          <div class="icon-first-page"></div>
+          <div class="icon-prev-page"></div>
+        </div>
+        <!-- Hien thi danh sach trang -->
+        <div class="icon-number-page">
+          <button class="number-page" >1</button>
+          <button class="number-page">2</button>
+          <button class="number-page">3</button>
+          <button class="number-page">4</button>
+        </div>
+
+        <!-- Next den trang tiep theo -->
+        <div class="icon-next-page">
+          <div class="icon-next-topage"></div>
+          <div class="icon-last-page"></div>
+        </div>
+
+      </div>
+      <div id="footer-infor"><span class="footer-title-numberlist">10</span> nhân viên/trang</div>
+    </div>
   </div>
 </template>
 

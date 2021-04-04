@@ -108,7 +108,7 @@
     bottom: 56px;
     left: 16px;
     right: 20px;
-    overflow: auto;
+    overflow: scroll; 
 }
 
 #content-table{
@@ -134,6 +134,8 @@
     border-bottom: 1px solid #ccc;
     padding-left: 10px; 
     padding-right: 8px;
+    
+
 }
 
 #content-table th{
@@ -144,4 +146,110 @@
 #content-table td{
     font-family: GoogleSans-Regular; 
     font-size: 13px;
+}
+
+#content-table thead tr{
+    height: 48px;
+}
+
+
+/* Tao footer */
+
+#footer{
+    position: absolute; 
+    height: 56px;
+    bottom: 0;
+    left: 16px;
+    right: 20px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 12px;
+    align-items: center;
+}
+
+#footer-title,#footer-infor{
+    font-family: GoogleSans-Regular;
+    font-size: 12px;
+}
+
+.footer-title-numberlist{
+    font-family: GoogleSans-Medium;
+    font-weight: 600;
+}
+
+/* Tao thanh dieu huong trang web */
+#footer-paging{
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Di chuyen ve trang truoc */
+.icon-pre-page{
+    display: flex;
+}
+
+.icon-pre-page .icon-first-page{
+    width: 20px; 
+    height: 20px; 
+    background-image: url("../../assets/icon/btn-firstpage.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;   
+}
+
+.icon-pre-page .icon-prev-page{
+    width: 20px; 
+    height: 20px; 
+    background-image: url("../../assets/icon/btn-prev-page.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;   
+}
+
+/* Tao phan chon trang */
+.icon-number-page .number-page{
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    border-radius: 50%;
+    outline: none;
+    border: 1px solid #ccc;
+}
+
+.icon-number-page .number-page:hover{
+    border: none;
+    background-color: #DADCE0;
+}
+
+.icon-number-page .number-page:focus{
+    border: none;
+    background-color: #019160;
+}
+.icon-number-page .number-page:last-child{
+    margin-right: 0;
+    
+}
+
+/* Tao next trang */
+
+.icon-next-page{
+    display: flex;
+}
+
+.icon-next-page .icon-next-topage{
+    width: 20px; 
+    height: 20px; 
+    background-image: url("../../assets/icon/btn-next-page.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;   
+}
+
+.icon-next-page .icon-last-page{
+    width: 20px; 
+    height: 20px; 
+    background-image: url("../../assets/icon/btn-lastpage.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;   
 }
