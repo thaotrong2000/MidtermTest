@@ -224,6 +224,7 @@
 .icon-number-page .number-page:focus{
     border: none;
     background-color: #019160;
+    color: #ffffff;
 }
 .icon-number-page .number-page:last-child{
     margin-right: 0;

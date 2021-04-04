@@ -3,6 +3,7 @@
     <Navbar/>
     <Header/>
     <Content/>
+
   </div>
 </template>
 

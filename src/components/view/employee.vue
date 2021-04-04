@@ -1,9 +1,9 @@
 <template>
-    <div id=content>
-        <div id="content-title">
+  <div>
+    <div id="content-title">
       <!-- Phan dau cua content -->
       <div id="content-list-customer">Danh sách nhân viên</div>
-      <button id="btn-add" class="button-function">
+      <button id="btn-add" class="button-function" @click="isShowDialog()">
         <div id="btn-add-icon"></div>
         <div id="btn-add-text">Thêm nhân viên</div>
       </button>
@@ -683,8 +683,11 @@
 
     <!-- Tao footer -->
     <div id="footer">
-      <div id="footer-title">Hiển thị <span class="footer-title-numberlist">1-10/10000</span> nhân viên</div>
-      
+      <div id="footer-title">
+        Hiển thị <span class="footer-title-numberlist">1-10/10000</span> nhân
+        viên
+      </div>
+
       <div id="footer-paging">
         <!-- Tro ve trang truoc -->
         <div class="icon-pre-page">
@@ -693,7 +696,7 @@
         </div>
         <!-- Hien thi danh sach trang -->
         <div class="icon-number-page">
-          <button class="number-page" >1</button>
+          <button class="number-page">1</button>
           <button class="number-page">2</button>
           <button class="number-page">3</button>
           <button class="number-page">4</button>
@@ -704,9 +707,37 @@
           <div class="icon-next-topage"></div>
           <div class="icon-last-page"></div>
         </div>
-
       </div>
-      <div id="footer-infor"><span class="footer-title-numberlist">10</span> nhân viên/trang</div>
+      <div id="footer-infor">
+        <span class="footer-title-numberlist">10</span> nhân viên/trang
+      </div>
     </div>
-    </div>
+    <Dialog 
+    :isShow="isShow" 
+    @closeDialog = "closeDialog()"
+    />
+  </div>
 </template>
+
+<script>
+
+import Dialog from "../layout/dialog"
+export default {
+  data(){
+    return{
+      isShow: false
+    }
+  },
+  components:{
+    Dialog
+  }, 
+  methods:{
+    isShowDialog(){
+      this.isShow = true;
+    },
+    closeDialog(){
+      this.isShow = false;
+    }
+  }
+}
+</script>
