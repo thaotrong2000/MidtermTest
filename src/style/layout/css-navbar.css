@@ -106,9 +106,12 @@
 
 /* Router CSS */
 
-router-link{
+.btn-menu {
     display: flex;
+    text-decoration: none;
+    color: #000000;
 }
+
 
 
 

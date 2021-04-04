@@ -11,46 +11,34 @@
 
     <!-- Tao thanh Menu -->
     <div id="navbar-menu">
-      <button class="btn-menu" autofocus>
-        <router-link>
-          <div class="btn-menu-icon btn-dashboard"></div>
-          <div class="btn-menu-text ">Tổng quan</div>
-        </router-link>
-      </button>
+      <router-link class="btn-menu"  to="/dashboard">
+        <div class="btn-menu-icon btn-dashboard"></div>
+        <div class="btn-menu-text ">Tổng quan</div>
+      </router-link>
 
-      <button class="btn-menu">
-        <router-link>
-          <div class="btn-menu-icon btn-report"></div>
-          <div class="btn-menu-text ">Báo cáo</div>
-        </router-link>
-      </button>
+      <router-link class="btn-menu" to="/report">
+        <div class="btn-menu-icon btn-report" ></div>
+        <div class="btn-menu-text ">Báo cáo</div>
+      </router-link>
 
-      <button class="btn-menu">
-        <router-link>
-          <div class="btn-menu-icon btn-buy"></div>
-          <div class="btn-menu-text ">Mua hàng</div>
-        </router-link>
-      </button>
-      <button class="btn-menu">
-        <router-link>
-          <div class="btn-menu-icon btn-employee"></div>
-          <div class="btn-menu-text ">Danh mục nhân viên</div>
-        </router-link>
-      </button>
+      <router-link class="btn-menu" to="/buy">
+        <div class="btn-menu-icon btn-buy" ></div>
+        <div class="btn-menu-text ">Mua hàng</div>
+      </router-link>
+      <router-link class="btn-menu" to="/employee">
+        <div class="btn-menu-icon btn-employee"></div>
+        <div class="btn-menu-text ">Danh mục nhân viên</div>
+      </router-link>
 
-      <button class="btn-menu">
-        <router-link>
-          <div class="btn-menu-icon btn-employee"></div>
-          <div class="btn-menu-text ">Danh mục khách hàng</div>
-        </router-link>
-      </button>
+      <router-link class="btn-menu" to="/customer">
+        <div class="btn-menu-icon btn-employee" ></div>
+        <div class="btn-menu-text ">Danh mục khách hàng</div>
+      </router-link>
 
-      <button class="btn-menu">
-        <router-link>
-          <div class="btn-menu-icon btn-system"></div>
-          <div class="btn-menu-text ">Thiết lập hệ thống</div>
-        </router-link>
-      </button>
+      <router-link class="btn-menu" to="/system">
+        <div class="btn-menu-icon btn-system" ></div>
+        <div class="btn-menu-text ">Thiết lập hệ thống</div>
+      </router-link>
     </div>
   </div>
 </template>
