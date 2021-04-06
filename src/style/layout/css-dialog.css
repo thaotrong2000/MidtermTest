@@ -161,21 +161,22 @@
 }
 
 .dialog-input-text span{
-    color: red;
+    color: #FF4747;
 }
 
 
 /* Tao Footer */
 .dialog-footer{
     position: absolute; 
-    left: 18px;
-    right: 15px; 
-    bottom: 10px;
-    height: 40px;
-    background-color:darkolivegreen;
+    left: 0;
+    right: 0; 
+    bottom: 0;
+    height: 45px;
+    background-color:#D2D2D2;
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    border-radius:5px;
 
 }
 
@@ -183,10 +184,9 @@
 /* Tao button save and cacel trong dialog */
 
 .dialog-button-change{
-    height: 30px; 
+    height: 34px; 
     width: 90px; 
-    background-color:#019160;
-    line-height: 30px;
+    line-height: 34px;
     text-align: center;
     font-family: GoogleSans-Regular;
     font-size: 15px;
@@ -195,9 +195,35 @@
 .dialog-button-change .dialog-save-icon{
     width: 16px;
     height: 16px; 
-    background-image: url("../../assets/icon/");
+    background-image: url("../../assets/icon/save.svg");
+    background-repeat: no-repeat; 
+    background-size: contain; 
+    background-position: center;
+    margin-right: 10px;
 }
 
 .dialog-footer .dialog-button-change:last-child{
-    margin-right: 27px;
+    margin-right: 20px;
+    margin-left: 10px;
+}
+
+.dialog-footer .dialog-save{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #01B075;
+    border-radius: 3px;
+}
+/* Tao button save */
+.dialog-footer .dialog-save:hover,.dialog-save:focus{
+    background-color: #019160;
+    color: #ffffff;
+}
+
+/* Tao button cancel */
+
+.dialog-footer .dialog-cacel:hover,.dialog-cacel:focus{
+    background-color: #FF4747;
+    color: #ffffff;
+    border-radius: 3px;
 }

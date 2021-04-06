@@ -19,7 +19,7 @@
             A. THÔNG TIN CHUNG:
           </div>
 
-          <hr>
+          <hr />
 
           <!-- Tao thong tin o dong 1 -->
 
@@ -27,12 +27,20 @@
           <div class="dialog-information">
             <div class="dialog-input-label">
               <div class="dialog-input-text">Mã nhân viên(<span>*</span>)</div>
-              <input type="text" class="dialog-input" autofocus/>
+              <input
+                type="text"
+                class="dialog-input"
+                v-model="employeeGet.EmployeeCode"
+              />
             </div>
             <!-- Right -->
             <div class="dialog-input-label">
               <div class="dialog-input-text">Họ và tên(<span>*</span>)</div>
-              <input type="text" class="dialog-input" />
+              <input
+                type="text"
+                class="dialog-input"
+                v-model="employeeGet.FullName"
+              />
             </div>
           </div>
 
@@ -45,7 +53,7 @@
             <!-- Right -->
             <div class="dialog-input-label">
               <div class="dialog-input-text">Giới tính</div>
-              <select class="dialog-input">
+              <select class="dialog-input" v-model="employeeGet.EmployeeCode">
                 <option value="1">Nam</option>
                 <option value="0">Nữ</option>
                 <option value="2">Khác</option>
@@ -53,17 +61,26 @@
             </div>
           </div>
 
-
           <!-- Tao thong tin dong thu 3 -->
           <div class="dialog-information">
             <div class="dialog-input-label">
-              <div class="dialog-input-text">Số CMTNHD/ Căn cước(<span>*</span>)</div>
-              <input type="text" class="dialog-input" />
+              <div class="dialog-input-text">
+                Số CMTNHD/ Căn cước(<span>*</span>)
+              </div>
+              <input
+                type="text"
+                class="dialog-input"
+                v-model="employeeGet.IdentityNumber"
+              />
             </div>
             <!-- Right -->
             <div class="dialog-input-label">
               <div class="dialog-input-text">Ngày cấp</div>
-              <input type="text" class="dialog-input" />
+              <input
+                type="text"
+                class="dialog-input"
+                v-model="employeeGet.IdentityDate"
+              />
             </div>
           </div>
 
@@ -71,7 +88,11 @@
           <div class="dialog-information">
             <div class="dialog-input-label">
               <div class="dialog-input-text">Nơi cấp</div>
-              <input type="text" class="dialog-input" />
+              <input
+                type="text"
+                class="dialog-input"
+                v-model="employeeGet.IdentityPlace"
+              />
             </div>
             <!-- Right -->
             <!-- <div class="dialog-input-label">
@@ -81,15 +102,23 @@
           </div>
 
           <!-- Tao thong tin dong thu 5 -->
-          <div class="dialog-information dialog-information-last" >
+          <div class="dialog-information dialog-information-last">
             <div class="dialog-input-label">
               <div class="dialog-input-text">Email(*)</div>
-              <input type="text" class="dialog-input" />
+              <input
+                type="text"
+                class="dialog-input"
+                v-model="employeeGet.Email"
+              />
             </div>
             <!-- Right -->
             <div class="dialog-input-label">
               <div class="dialog-input-text">Số điện thoại(<span>*</span>)</div>
-              <input type="text" class="dialog-input" />
+              <input
+                type="text"
+                class="dialog-input"
+                v-model="employeeGet.PhoneNumber"
+              />
             </div>
           </div>
 
@@ -97,7 +126,7 @@
             B. THÔNG TIN CÔNG VIỆC:
           </div>
 
-          <hr>
+          <hr />
 
           <!-- Tao thong tin o dong 1 -->
 
@@ -105,12 +134,20 @@
           <div class="dialog-information">
             <div class="dialog-input-label">
               <div class="dialog-input-text">Vị trí</div>
-              <input type="text" class="dialog-input" />
+              <input
+                type="text"
+                class="dialog-input"
+                v-model="employeeGet.PositionName"
+              />
             </div>
             <!-- Right -->
             <div class="dialog-input-label">
               <div class="dialog-input-text">Phòng ban</div>
-              <input type="text" class="dialog-input" />
+              <input
+                type="text"
+                class="dialog-input"
+                v-model="employeeGet.DepartmentName"
+              />
             </div>
           </div>
 
@@ -118,12 +155,20 @@
           <div class="dialog-information">
             <div class="dialog-input-label">
               <div class="dialog-input-text">Mã số thuế cá nhân</div>
-              <input type="text" class="dialog-input" />
+              <input
+                type="text"
+                class="dialog-input"
+                v-model="employeeGet.PersonalTaxCode"
+              />
             </div>
             <!-- Right -->
             <div class="dialog-input-label">
               <div class="dialog-input-text">Mức lương cơ bản</div>
-              <input type="text" class="dialog-input" />
+              <input
+                type="text"
+                class="dialog-input"
+                v-model="employeeGet.Salary"
+              />
             </div>
           </div>
 
@@ -136,7 +181,11 @@
             <!-- Right -->
             <div class="dialog-input-label">
               <div class="dialog-input-text">Tình trạng công việc</div>
-              <input type="text" class="dialog-input" />
+              <input
+                type="text"
+                class="dialog-input"
+                v-model="employeeGet.WorkStatus"
+              />
             </div>
           </div>
         </div>
@@ -146,23 +195,37 @@
 
       <!-- Tao Footer -->
       <div class="dialog-footer">
-        <div class="dialog-cacel dialog-button-change">Hủy</div>
-        <div class="dialog-save dialog-button-change">
+        <button @click="deleteData()">Xoa</button>
+        <div class="dialog-cacel dialog-button-change" @click="closeDialog()">
+          Hủy
+        </div>
+        <div class="dialog-save dialog-button-change" @click="saveButton()">
           <div class="dialog-save-icon"></div>
           <div class="dialog-save-text">Lưu</div>
         </div>
-
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   props: {
     isShow: {
       type: Boolean,
       default: true,
+    },
+    employeeGet: {
+      type: Object,
+    },
+    statusForm: {
+      type: String,
+      default: "add",
+    },
+    selectedEmployee: {
+      type: String,
+      default: "",
     },
   },
   data() {
@@ -171,6 +234,52 @@ export default {
   methods: {
     closeDialog() {
       this.$emit("closeDialog");
+    },
+
+    saveButton() {
+      if (this.statusForm == "add") {
+        alert("Ban dang them moi");
+        axios
+          .post("http://api.manhnv.net/v1/employees", this.employeeGet)
+          .then(() => {
+            alert("THANH CONG");
+
+            this.$emit("closeDialog");
+            this.$emit("loadData");
+          })
+          .catch((res) => {
+            console.log(res);
+            alert("that bai");
+          });
+      } else {
+        alert("Ban dang Sua");
+        axios
+          .put(
+            "http://api.manhnv.net/v1/employees/" + this.employeeGet.EmployeeId,
+            this.employeeGet
+          )
+          .then(() => {
+            alert("SUA THANH CONG");
+            this.$emit("closeDialog");
+            this.$emit("loadData");
+          })
+          .catch((res) => {
+            console.log(res);
+            alert(" sua that bai");
+          });
+      }
+    },
+    deleteData() {
+      axios
+        .delete("http://api.manhnv.net/v1/employees/" + this.selectedEmployee)
+        .then(() => {
+          alert("Xoa Thanh cong ");
+          this.$emit("closeDialog");
+          this.$emit("loadData");
+        })
+        .catch(() => {
+          alert("Khong");
+        });
     },
   },
 };

@@ -53,17 +53,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="employee in employees" :key="employee.EmployeeId">
-            <td>{{employee.EmployeeCode}}</td>
-            <td>{{employee.FullName}}</td>
-            <td>{{employee.GenderName}}</td>
-            <td>{{employee.DateOfBirth}}</td>
-            <td>{{employee.PhoneNumber}}</td>
-            <td>{{employee.Email}}</td>
-            <td>{{employee.PositionName}}</td>
-            <td>{{employee.DepartmentName}}</td>
-            <td>{{employee.Salary}}</td>
-            <td>{{employee.WorkStatus}}</td>
+          <tr
+            v-for="employee in employees"
+            :key="employee.EmployeeId"
+            @dblclick="trDoubleClick(employee.EmployeeId)"
+          >
+            <td>{{ employee.EmployeeCode }}</td>
+            <td>{{ employee.FullName }}</td>
+            <td>{{ employee.GenderName }}</td>
+            <td>{{ employee.DateOfBirth }}</td>
+            <td>{{ employee.PhoneNumber }}</td>
+            <td>{{ employee.Email }}</td>
+            <td>{{ employee.PositionName }}</td>
+            <td>{{ employee.DepartmentName }}</td>
+            <td>{{ employee.Salary }}</td>
+            <td>{{ employee.WorkStatus }}</td>
           </tr>
         </tbody>
       </table>
@@ -100,7 +104,14 @@
         <span class="footer-title-numberlist">10</span> nhân viên/trang
       </div>
     </div>
-    <Dialog :isShow="isShow" @closeDialog="closeDialog()" />
+    <Dialog
+      :isShow="isShow"
+      @closeDialog="closeDialog()"
+      :employeeGet="employeeGet"
+      :statusForm="statusForm"
+      @loadData="loadData()"
+      :selectedEmployee = "selectedEmployee"
+    />
   </div>
 </template>
 
@@ -111,17 +122,20 @@ export default {
   data() {
     return {
       isShow: false,
-      employees: []
+      employees: [],
+      employeeGet: {},
+      statusForm: "add",
+      selectedEmployee: ""
     };
   },
   created() {
     axios
       .get("http://api.manhnv.net/v1/employees")
-      .then(res=>{
-        console.log(res.data); 
+      .then((res) => {
+        console.log(res.data);
         this.employees = res.data;
       })
-      .catch(res=>{
+      .catch((res) => {
         console.log(res);
       });
   },
@@ -131,9 +145,38 @@ export default {
   methods: {
     isShowDialog() {
       this.isShow = true;
+      this.statusForm = "add";
+      this.employeeGet = {};
     },
     closeDialog() {
       this.isShow = false;
+    },
+    loadData() {
+      axios
+        .get("http://api.manhnv.net/v1/employees")
+        .then((res) => {
+          console.log(res.data);
+          this.employees = res.data;
+        })
+        .catch((res) => {
+          console.log(res);
+        });
+    },
+    trDoubleClick(customerId) {
+      this.statusForm = "edit";
+      this.isShow = true;
+      this.selectedEmployee = customerId; 
+
+      axios
+        .get("http://api.manhnv.net/v1/employees/" + customerId)
+        .then((res) => {
+          this.employeeGet = res.data;
+          console.log(this.employeeGet);
+        })
+        .catch((res) => {
+          console.log(res);
+          alert("That bai");
+        });
     },
   },
 };
