@@ -2,6 +2,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
 
+
+
+
 import employee from "./components/view/employee.vue"
 import dashboard from "./components/view/dashboard.vue"
 import report from "./components/view/report.vue"

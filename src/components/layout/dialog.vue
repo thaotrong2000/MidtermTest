@@ -28,9 +28,17 @@
             <div class="dialog-input-label">
               <div class="dialog-input-text">Mã nhân viên(<span>*</span>)</div>
               <input
+                id="employeeCode"
                 type="text"
                 class="dialog-input"
                 v-model="employeeGet.EmployeeCode"
+                ref="employeeCode"
+                @blur="employeeCode()"
+                :style="
+                  checkEmployeeCode
+                    ? 'border: 0.1px solid #ccc;'
+                    : 'border: 0.1px solid red;'
+                "
               />
             </div>
             <!-- Right -->
@@ -40,6 +48,13 @@
                 type="text"
                 class="dialog-input"
                 v-model="employeeGet.FullName"
+                ref="employeeFullName"
+                @blur="employeeFullName()"
+                :style="
+                  checkEmployeeFullName
+                    ? 'border: 0.1px solid #ccc;'
+                    : 'border: 0.1px solid red;'
+                "
               />
             </div>
           </div>
@@ -83,6 +98,13 @@
                 type="text"
                 class="dialog-input"
                 v-model="employeeGet.IdentityNumber"
+                ref="employeeIdentityNumber"
+                @blur="employeeIdentityNumber()"
+                :style="
+                  checkEmployeeIdentityNumber
+                    ? 'border: 0.1px solid #ccc;'
+                    : 'border: 0.1px solid red;'
+                "
               />
             </div>
             <!-- Right -->
@@ -117,11 +139,18 @@
           <!-- Tao thong tin dong thu 5 -->
           <div class="dialog-information dialog-information-last">
             <div class="dialog-input-label">
-              <div class="dialog-input-text">Email(*)</div>
+              <div class="dialog-input-text">Email<span>(*)</span></div>
               <input
                 type="text"
                 class="dialog-input"
                 v-model="employeeGet.Email"
+                ref="employeeEmail"
+                @blur="employeeEmail()"
+                :style="
+                  checkEmployeeEmail
+                    ? 'border: 0.1px solid #ccc;'
+                    : 'border: 0.1px solid red;'
+                "
               />
             </div>
             <!-- Right -->
@@ -131,6 +160,13 @@
                 type="text"
                 class="dialog-input"
                 v-model="employeeGet.PhoneNumber"
+                ref="employeeTel"
+                @blur="employeeTel()"
+                :style="
+                  checkEmployeeTel
+                    ? 'border: 0.1px solid #ccc;'
+                    : 'border: 0.1px solid red;'
+                "
               />
             </div>
           </div>
@@ -189,10 +225,7 @@
           <div class="dialog-information">
             <div class="dialog-input-label">
               <div class="dialog-input-text">Ngày gia nhập công ty</div>
-              <input
-                type="date"
-                class="dialog-input"
-              />
+              <input type="date" class="dialog-input" />
             </div>
             <!-- Right -->
             <div class="dialog-input-label">
@@ -234,6 +267,7 @@
 
 <script>
 import axios from "axios";
+
 export default {
   props: {
     isShow: {
@@ -255,15 +289,66 @@ export default {
       type: Boolean,
       default: false,
     },
+    inputFocus: {
+      type: Boolean,
+      default: false,
+    },
   },
+
   data() {
-    return {};
+    return {
+      checkEmployeeCode: true,
+      checkEmployeeFullName: true,
+      checkEmployeeIdentityNumber: true,
+      checkEmployeeEmail: true,
+      checkEmployeeTel: true,
+    };
   },
   methods: {
-    updateDateIdentityDate(x){
-      this.employeeGet.IdentityDate = x
+    employeeTel() {
+      var check = this.$refs.employeeTel.value;
+      if (check == "") {
+        this.checkEmployeeTel = false;
+      } else {
+        this.checkEmployeeTel = true;
+      }
     },
-    
+    employeeEmail() {
+      var check = this.$refs.employeeEmail.value;
+      if (check == "") {
+        this.checkEmployeeEmail = false;
+      } else {
+        this.checkEmployeeEmail = true;
+      }
+    },
+    employeeIdentityNumber() {
+      var check = this.$refs.employeeIdentityNumber.value;
+      if (check == "") {
+        this.checkEmployeeIdentityNumber = false;
+      } else {
+        this.checkEmployeeIdentityNumber = true;
+      }
+    },
+    employeeFullName() {
+      var check = this.$refs.employeeFullName.value;
+      if (check == "") {
+        this.checkEmployeeFullName = false;
+      } else {
+        this.checkEmployeeFullName = true;
+      }
+    },
+    employeeCode() {
+      var check = this.$refs.employeeCode.value;
+      if (check == "") {
+        this.checkEmployeeCode = false;
+      } else {
+        this.checkEmployeeCode = true;
+      }
+    },
+    updateDateIdentityDate(x) {
+      this.employeeGet.IdentityDate = x;
+    },
+
     updateDate(x) {
       this.employeeGet.DateOfBirth = x;
     },
@@ -281,57 +366,107 @@ export default {
     },
     closeDialog() {
       this.$emit("closeDialog");
+      (this.checkEmployeeCode = true),
+        (this.checkEmployeeFullName = true),
+        (this.checkEmployeeIdentityNumber = true),
+        (this.checkEmployeeEmail = true),
+        (this.checkEmployeeTel = true);
     },
 
     saveButton() {
-      if (this.statusForm == "add") {
-        alert("Ban dang them moi");
-        axios
-          .post("http://api.manhnv.net/v1/employees", this.employeeGet)
-          .then(() => {
-            alert("THANH CONG");
+      if (
+        this.checkEmployeeCode == true &&
+        this.checkEmployeeFullName == true &&
+        this.checkEmployeeIdentityNumber == true &&
+        this.checkEmployeeEmail == true &&
+        this.checkEmployeeTel == true
+      ) {
+        if (this.statusForm == "add") {
+          if (this.$refs.employeeCode.value != "") {
+            alert("Ban dang them moi");
+            axios
+              .post("http://api.manhnv.net/v1/employees", this.employeeGet)
+              .then(() => {
+                alert("THANH CONG");
 
-            this.$emit("closeDialog");
-            this.$emit("loadData");
-          })
-          .catch((res) => {
-            console.log(res);
-            alert("that bai");
-          });
+                this.$emit("closeDialog");
+                this.$emit("loadData");
+              })
+              .catch((res) => {
+                console.log(res);
+                alert("that bai");
+              });
+          } else {
+            this.checkEmployeeCode = false;
+            this.checkEmployeeFullName = false;
+            this.checkEmployeeIdentityNumber = false;
+            this.checkEmployeeEmail = false;
+            this.checkEmployeeTel = false;
+            alert("Bạn cần nhập đầy đủ thông tin bắt buộc");
+          }
+        } else {
+          alert("Ban dang Sua");
+          axios
+            .put(
+              "http://api.manhnv.net/v1/employees/" +
+                this.employeeGet.EmployeeId,
+              this.employeeGet
+            )
+            .then(() => {
+              alert("SUA THANH CONG");
+              this.$emit("closeDialog");
+              this.$emit("loadData");
+            })
+            .catch((res) => {
+              console.log(res);
+              alert(" sua that bai");
+            });
+        }
       } else {
-        alert("Ban dang Sua");
-        axios
-          .put(
-            "http://api.manhnv.net/v1/employees/" + this.employeeGet.EmployeeId,
-            this.employeeGet
-          )
-          .then(() => {
-            alert("SUA THANH CONG");
-            this.$emit("closeDialog");
-            this.$emit("loadData");
-          })
-          .catch((res) => {
-            console.log(res);
-            alert(" sua that bai");
-          });
+        alert("Bạn cần nhập đầy đủ thông tin bắt buộc");
       }
     },
     deleteData() {
-      axios
-        .delete("http://api.manhnv.net/v1/employees/" + this.selectedEmployee)
-        .then(() => {
-          alert("Xoa Thanh cong ");
-          this.$emit("closeDialog");
-          this.$emit("loadData");
-        })
-        .catch(() => {
-          alert("Khong");
-        });
+      var confirmDelete = confirm(
+        "“Bạn có chắc chắn muốn xóa nhân viên [" +
+          this.employeeGet.EmployeeCode +
+          "] không?”"
+      );
+      if (confirmDelete == true) {
+        axios
+          .delete("http://api.manhnv.net/v1/employees/" + this.selectedEmployee)
+          .then(() => {
+            alert("Xoa Thanh cong ");
+            this.$emit("closeDialog");
+            this.$emit("loadData");
+          })
+          .catch(() => {
+            alert("Khong");
+          });
+      } else {
+        alert("Cam on ban");
+      }
     },
   },
+  watch: {
+    inputFocus() {
+      if(this.inputFocus==true){
+        this.checkEmployeeCode = true;
+        this.$nextTick(() => this.$refs.employeeCode.focus())
+        
+      }
+      
+    },
+  },
+  
 };
 </script>
 
 <style>
 @import "../../style/layout/css-dialog.css";
+
+.red {
+  background-color: #ccc;
+  color: #ffffff;
+}
 </style>

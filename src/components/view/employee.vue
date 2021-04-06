@@ -32,7 +32,7 @@
         </div>
       </div>
 
-      <button id="content-navbar-reload"></button>
+      <button id="content-navbar-reload" @click="loadData()"></button>
     </div>
     <!-- Content Table -->
 
@@ -66,7 +66,7 @@
             <td>{{ employee.Email }}</td>
             <td>{{ employee.PositionName }}</td>
             <td>{{ employee.DepartmentName }}</td>
-            <td>{{ employee.Salary }}</td>
+            <td>{{ formatMoney(employee.Salary) }}</td>
             <td>{{ employee.WorkStatus }}</td>
           </tr>
         </tbody>
@@ -112,6 +112,7 @@
       @loadData="loadData()"
       :selectedEmployee="selectedEmployee"
       :btnDelete="btnDelete"
+      :inputFocus="inputFocus"
     />
   </div>
 </template>
@@ -128,6 +129,7 @@ export default {
       statusForm: "add",
       selectedEmployee: "",
       btnDelete: false,
+      inputFocus: false
     };
   },
   created() {
@@ -145,6 +147,10 @@ export default {
     Dialog,
   },
   methods: {
+    formatMoney(money){
+      var a =  new Intl.NumberFormat().format(money);
+      return a;
+    },
     formatDateOfBirth(birth) {
       var d = new Date(birth),
         month = "" + (d.getMonth() + 1),
@@ -156,15 +162,24 @@ export default {
 
       return [year, month, day].join("-");
     },
+
+    // Hien thi Dialog Them moi nhan vien
     isShowDialog() {
       this.isShow = true;
       this.statusForm = "add";
       this.employeeGet = {};
       this.btnDelete = true;
+      this.inputFocus = true;
+
     },
+
+    // Close Dialog 
     closeDialog() {
       this.isShow = false;
+      this.inputFocus = false;
     },
+
+    // Load Data 
     loadData() {
       axios
         .get("http://api.manhnv.net/v1/employees")
@@ -176,6 +191,8 @@ export default {
           console.log(res);
         });
     },
+
+    // Hien thi thong tin cua Employee
     trDoubleClick(customerId) {
       this.statusForm = "edit";
       this.isShow = true;
