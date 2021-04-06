@@ -142,6 +142,7 @@
               <div class="dialog-input-text">Email<span>(*)</span></div>
               <input
                 type="text"
+                placeholder="misa@company"
                 class="dialog-input"
                 v-model="employeeGet.Email"
                 ref="employeeEmail"
@@ -315,7 +316,9 @@ export default {
     },
     employeeEmail() {
       var check = this.$refs.employeeEmail.value;
-      if (check == "") {
+      var regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(check); 
+
+      if (check == "" || regex == false) {
         this.checkEmployeeEmail = false;
       } else {
         this.checkEmployeeEmail = true;

@@ -196,6 +196,7 @@ export default {
     trDoubleClick(customerId) {
       this.statusForm = "edit";
       this.isShow = true;
+      this.inputFocus = true;
       this.selectedEmployee = customerId;
       this.btnDelete = false;
 
