@@ -48,16 +48,27 @@
           <div class="dialog-information">
             <div class="dialog-input-label">
               <div class="dialog-input-text">Ngày sinh</div>
-              <input type="date" class="dialog-input" />
+              <input
+                type="date"
+                class="dialog-input"
+                v-bind:value="dateChange(employeeGet.DateOfBirth)"
+                v-on:change="updateDate($event.target.value)"
+              />
             </div>
             <!-- Right -->
             <div class="dialog-input-label">
               <div class="dialog-input-text">Giới tính</div>
               <select class="dialog-input" v-model="employeeGet.Gender">
-                <option  value="3"></option>
-                <option  :selected=" employeeGet.Gender == 1" value="1">Nam</option>
-                <option :selected=" employeeGet.Gender == 0" value="0">Nữ</option>
-                <option  :selected=" employeeGet.Gender == 2" value="2">Không xác định</option>
+                <option value="3"></option>
+                <option :selected="employeeGet.Gender == 1" value="1"
+                  >Nam</option
+                >
+                <option :selected="employeeGet.Gender == 0" value="0"
+                  >Nữ</option
+                >
+                <option :selected="employeeGet.Gender == 2" value="2"
+                  >Không xác định</option
+                >
               </select>
             </div>
           </div>
@@ -78,9 +89,10 @@
             <div class="dialog-input-label">
               <div class="dialog-input-text">Ngày cấp</div>
               <input
-                type="text"
+                type="date"
                 class="dialog-input"
-                v-model="employeeGet.IdentityDate"
+                v-bind:value="dateChange(employeeGet.IdentityDate)"
+                v-on:change="updateDateIdentityDate($event.target.value)"
               />
             </div>
           </div>
@@ -177,7 +189,10 @@
           <div class="dialog-information">
             <div class="dialog-input-label">
               <div class="dialog-input-text">Ngày gia nhập công ty</div>
-              <input type="text" class="dialog-input" />
+              <input
+                type="date"
+                class="dialog-input"
+              />
             </div>
             <!-- Right -->
             <div class="dialog-input-label">
@@ -196,15 +211,21 @@
 
       <!-- Tao Footer -->
       <div class="dialog-footer">
-        <button @click="deleteData()" class="dialog-delete-employee dialog-button-change" :disabled="btnDelete" >Xóa</button>
+        <button
+          @click="deleteData()"
+          class="dialog-delete-employee dialog-button-change"
+          :disabled="btnDelete"
+        >
+          Xóa
+        </button>
         <div class="dialog-cancel-delete">
           <div class="dialog-cacel dialog-button-change" @click="closeDialog()">
-          Hủy
-        </div>
-        <div class="dialog-save dialog-button-change" @click="saveButton()">
-          <div class="dialog-save-icon"></div>
-          <div class="dialog-save-text">Lưu</div>
-        </div>
+            Hủy
+          </div>
+          <div class="dialog-save dialog-button-change" @click="saveButton()">
+            <div class="dialog-save-icon"></div>
+            <div class="dialog-save-text">Lưu</div>
+          </div>
         </div>
       </div>
     </div>
@@ -230,15 +251,34 @@ export default {
       type: String,
       default: "",
     },
-    btnDelete:{
-      type: Boolean, 
-      default: false
-    }
+    btnDelete: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {};
   },
   methods: {
+    updateDateIdentityDate(x){
+      this.employeeGet.IdentityDate = x
+    },
+    
+    updateDate(x) {
+      this.employeeGet.DateOfBirth = x;
+    },
+
+    dateChange(date) {
+      var d = new Date(date),
+        month = "" + (d.getMonth() + 1),
+        day = "" + d.getDate(),
+        year = d.getFullYear();
+
+      if (month.length < 2) month = "0" + month;
+      if (day.length < 2) day = "0" + day;
+
+      return [year, month, day].join("-");
+    },
     closeDialog() {
       this.$emit("closeDialog");
     },
@@ -288,8 +328,6 @@ export default {
           alert("Khong");
         });
     },
-    
-    
   },
 };
 </script>

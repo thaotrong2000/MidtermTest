@@ -61,7 +61,7 @@
             <td>{{ employee.EmployeeCode }}</td>
             <td>{{ employee.FullName }}</td>
             <td>{{ employee.GenderName }}</td>
-            <td>{{ employee.DateOfBirth }}</td>
+            <td>{{ formatDateOfBirth(employee.DateOfBirth) }}</td>
             <td>{{ employee.PhoneNumber }}</td>
             <td>{{ employee.Email }}</td>
             <td>{{ employee.PositionName }}</td>
@@ -110,8 +110,8 @@
       :employeeGet="employeeGet"
       :statusForm="statusForm"
       @loadData="loadData()"
-      :selectedEmployee = "selectedEmployee"
-      :btnDelete = "btnDelete"
+      :selectedEmployee="selectedEmployee"
+      :btnDelete="btnDelete"
     />
   </div>
 </template>
@@ -127,7 +127,7 @@ export default {
       employeeGet: {},
       statusForm: "add",
       selectedEmployee: "",
-      btnDelete: false
+      btnDelete: false,
     };
   },
   created() {
@@ -145,6 +145,17 @@ export default {
     Dialog,
   },
   methods: {
+    formatDateOfBirth(birth) {
+      var d = new Date(birth),
+        month = "" + (d.getMonth() + 1),
+        day = "" + d.getDate(),
+        year = d.getFullYear();
+
+      if (month.length < 2) month = "0" + month;
+      if (day.length < 2) day = "0" + day;
+
+      return [year, month, day].join("-");
+    },
     isShowDialog() {
       this.isShow = true;
       this.statusForm = "add";
@@ -168,7 +179,7 @@ export default {
     trDoubleClick(customerId) {
       this.statusForm = "edit";
       this.isShow = true;
-      this.selectedEmployee = customerId; 
+      this.selectedEmployee = customerId;
       this.btnDelete = false;
 
       axios
