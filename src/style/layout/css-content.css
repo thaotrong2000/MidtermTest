@@ -129,6 +129,8 @@
     
 }
 
+
+
 #content table th,td{
     text-align: left;
     border-bottom: 1px solid #ccc;
@@ -148,9 +150,6 @@
     font-size: 13px;
 }
 
-#content-table thead tr{
-    height: 48px;
-}
 
 
 /* Tao footer */
