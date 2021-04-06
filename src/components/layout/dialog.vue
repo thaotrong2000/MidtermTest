@@ -294,6 +294,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    employeeCodeDefault:{
+      type: Number,
+      default: 0
+    }
   },
 
   data() {
@@ -385,19 +389,21 @@ export default {
         this.checkEmployeeTel == true
       ) {
         if (this.statusForm == "add") {
+          alert(this.employeeCodeDefault);
           if (this.$refs.employeeCode.value != "") {
-            alert("Ban dang them moi");
+            
+            alert("Bạn đang thêm mới Nhân Viên");
             axios
               .post("http://api.manhnv.net/v1/employees", this.employeeGet)
               .then(() => {
-                alert("THANH CONG");
+                alert("Thêm mới thành công");
 
                 this.$emit("closeDialog");
                 this.$emit("loadData");
               })
               .catch((res) => {
                 console.log(res);
-                alert("that bai");
+                alert("Không thêm được dữ liệu");
               });
           } else {
             this.checkEmployeeCode = false;

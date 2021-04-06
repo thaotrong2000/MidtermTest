@@ -113,6 +113,7 @@
       :selectedEmployee="selectedEmployee"
       :btnDelete="btnDelete"
       :inputFocus="inputFocus"
+      :employeeCodeDefault= "employeeCodeDefault"
     />
   </div>
 </template>
@@ -129,7 +130,10 @@ export default {
       statusForm: "add",
       selectedEmployee: "",
       btnDelete: false,
-      inputFocus: false
+      inputFocus: false,
+      employeeCodeArray: [],
+      employeeCodeHeader: [],
+      employeeCodeDefault: 0
     };
   },
   created() {
@@ -138,6 +142,13 @@ export default {
       .then((res) => {
         console.log(res.data);
         this.employees = res.data;
+        console.log(res.data.length);
+
+        for (var x = 0; x < res.data.length; x++) {
+          this.employeeCodeArray.push(res.data[x].EmployeeCode);
+        }
+        console.log(this.employeeCodeArray);
+        this.searchMaxEmployeeCode(res);
       })
       .catch((res) => {
         console.log(res);
@@ -147,8 +158,8 @@ export default {
     Dialog,
   },
   methods: {
-    formatMoney(money){
-      var a =  new Intl.NumberFormat().format(money);
+    formatMoney(money) {
+      var a = new Intl.NumberFormat().format(money);
       return a;
     },
     formatDateOfBirth(birth) {
@@ -170,26 +181,56 @@ export default {
       this.employeeGet = {};
       this.btnDelete = true;
       this.inputFocus = true;
-
+      
     },
 
-    // Close Dialog 
+    // Close Dialog
     closeDialog() {
       this.isShow = false;
       this.inputFocus = false;
     },
 
-    // Load Data 
+    // Load Data
     loadData() {
       axios
         .get("http://api.manhnv.net/v1/employees")
         .then((res) => {
           console.log(res.data);
           this.employees = res.data;
+          this.searchMaxEmployeeCode(res);
         })
         .catch((res) => {
           console.log(res);
         });
+    },
+
+    // Function tim EmployeeCode Max
+    searchMaxEmployeeCode(res) {
+      this.employeeCodeHeader = [];
+      console.log(res.data.length);
+      this.employeeCodeArray = [];
+
+      for (var x = 0; x < res.data.length; x++) {
+        this.employeeCodeArray.push(res.data[x].EmployeeCode);
+      }
+      console.log(this.employeeCodeArray);
+
+      // Loc du lieu (EmployeeCode) tu array employeeCodeArray
+
+      for (x = 0; x < this.employeeCodeArray.length; x++) {
+        var substring = this.employeeCodeArray[x].substring(0, 3);
+        var regex = /NV-/;
+        if (regex.test(substring) == true) {
+          var substringCode = this.employeeCodeArray[x].substring(3);
+          this.employeeCodeHeader.push(substringCode);
+        }
+      }
+
+      console.log(this.employeeCodeHeader);
+
+      var max_of_array = Math.max.apply(Math, this.employeeCodeHeader);
+      this.employeeCodeDefault = max_of_array;
+      console.log(this.employeeCodeDefault);
     },
 
     // Hien thi thong tin cua Employee
