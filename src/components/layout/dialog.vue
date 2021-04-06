@@ -53,10 +53,11 @@
             <!-- Right -->
             <div class="dialog-input-label">
               <div class="dialog-input-text">Giới tính</div>
-              <select class="dialog-input" v-model="employeeGet.EmployeeCode">
-                <option value="1">Nam</option>
-                <option value="0">Nữ</option>
-                <option value="2">Khác</option>
+              <select class="dialog-input" v-model="employeeGet.Gender">
+                <option  value="3"></option>
+                <option  :selected=" employeeGet.Gender == 1" value="1">Nam</option>
+                <option :selected=" employeeGet.Gender == 0" value="0">Nữ</option>
+                <option  :selected=" employeeGet.Gender == 2" value="2">Không xác định</option>
               </select>
             </div>
           </div>
@@ -195,7 +196,7 @@
 
       <!-- Tao Footer -->
       <div class="dialog-footer">
-        <button @click="deleteData()" class="dialog-delete-employee dialog-button-change">Xóa</button>
+        <button @click="deleteData()" class="dialog-delete-employee dialog-button-change" :disabled="btnDelete" >Xóa</button>
         <div class="dialog-cancel-delete">
           <div class="dialog-cacel dialog-button-change" @click="closeDialog()">
           Hủy
@@ -229,6 +230,10 @@ export default {
       type: String,
       default: "",
     },
+    btnDelete:{
+      type: Boolean, 
+      default: false
+    }
   },
   data() {
     return {};
@@ -283,6 +288,8 @@ export default {
           alert("Khong");
         });
     },
+    
+    
   },
 };
 </script>

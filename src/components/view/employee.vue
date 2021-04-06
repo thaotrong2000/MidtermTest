@@ -111,6 +111,7 @@
       :statusForm="statusForm"
       @loadData="loadData()"
       :selectedEmployee = "selectedEmployee"
+      :btnDelete = "btnDelete"
     />
   </div>
 </template>
@@ -125,7 +126,8 @@ export default {
       employees: [],
       employeeGet: {},
       statusForm: "add",
-      selectedEmployee: ""
+      selectedEmployee: "",
+      btnDelete: false
     };
   },
   created() {
@@ -147,6 +149,7 @@ export default {
       this.isShow = true;
       this.statusForm = "add";
       this.employeeGet = {};
+      this.btnDelete = true;
     },
     closeDialog() {
       this.isShow = false;
@@ -166,6 +169,7 @@ export default {
       this.statusForm = "edit";
       this.isShow = true;
       this.selectedEmployee = customerId; 
+      this.btnDelete = false;
 
       axios
         .get("http://api.manhnv.net/v1/employees/" + customerId)

@@ -183,6 +183,7 @@
 .dialog-delete-employee{
     border: none;
     border-radius: 3px;
+    outline: none;
 
 }
 
