@@ -174,10 +174,26 @@
     height: 45px;
     background-color:#D2D2D2;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     border-radius:5px;
 
+}
+
+.dialog-delete-employee{
+    border: none;
+    border-radius: 3px;
+
+}
+
+.dialog-delete-employee:hover,.dialog-delete-employee:focus {
+    background-color: #FF4747;
+    color: #ffffff;
+
+}
+.dialog-cancel-delete{
+    display: flex; 
+    
 }
 
 
@@ -190,6 +206,7 @@
     text-align: center;
     font-family: GoogleSans-Regular;
     font-size: 15px;
+    cursor: pointer;
 }
 
 .dialog-button-change .dialog-save-icon{

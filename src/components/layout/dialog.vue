@@ -195,13 +195,15 @@
 
       <!-- Tao Footer -->
       <div class="dialog-footer">
-        <button @click="deleteData()">Xoa</button>
-        <div class="dialog-cacel dialog-button-change" @click="closeDialog()">
+        <button @click="deleteData()" class="dialog-delete-employee dialog-button-change">Xóa</button>
+        <div class="dialog-cancel-delete">
+          <div class="dialog-cacel dialog-button-change" @click="closeDialog()">
           Hủy
         </div>
         <div class="dialog-save dialog-button-change" @click="saveButton()">
           <div class="dialog-save-icon"></div>
           <div class="dialog-save-text">Lưu</div>
+        </div>
         </div>
       </div>
     </div>
