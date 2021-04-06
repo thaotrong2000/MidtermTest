@@ -64,8 +64,8 @@
             <td>{{ formatDateOfBirth(employee.DateOfBirth) }}</td>
             <td>{{ employee.PhoneNumber }}</td>
             <td>{{ employee.Email }}</td>
-            <td>{{ employee.PositionName }}</td>
-            <td>{{ employee.DepartmentName }}</td>
+            <td>Nhân viên Marketting</td>
+            <td>Phòng Marketting</td>
             <td>{{ formatMoney(employee.Salary) }}</td>
             <td>{{ employee.WorkStatus }}</td>
           </tr>
@@ -113,7 +113,8 @@
       :selectedEmployee="selectedEmployee"
       :btnDelete="btnDelete"
       :inputFocus="inputFocus"
-      :employeeCodeDefault= "employeeCodeDefault"
+      :employeeCodeDefault="employeeCodeDefault"
+      :employeeCodeArray ="employeeCodeArray"
     />
   </div>
 </template>
@@ -133,7 +134,7 @@ export default {
       inputFocus: false,
       employeeCodeArray: [],
       employeeCodeHeader: [],
-      employeeCodeDefault: 0
+      employeeCodeDefault: 0,
     };
   },
   created() {
@@ -179,9 +180,14 @@ export default {
       this.isShow = true;
       this.statusForm = "add";
       this.employeeGet = {};
+
+      //Set EmployeeCode
+      var numberMax = this.employeeCodeDefault + 1;
+      this.employeeGet.EmployeeCode = "NV-"+numberMax;
+
+      //
       this.btnDelete = true;
       this.inputFocus = true;
-      
     },
 
     // Close Dialog

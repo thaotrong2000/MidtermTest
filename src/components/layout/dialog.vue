@@ -294,9 +294,12 @@ export default {
       type: Boolean,
       default: false,
     },
-    employeeCodeDefault:{
+    employeeCodeDefault: {
       type: Number,
-      default: 0
+      default: 0,
+    },
+    employeeCodeArray:{
+      type: Array
     }
   },
 
@@ -320,7 +323,9 @@ export default {
     },
     employeeEmail() {
       var check = this.$refs.employeeEmail.value;
-      var regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(check); 
+      var regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+        check
+      );
 
       if (check == "" || regex == false) {
         this.checkEmployeeEmail = false;
@@ -346,7 +351,9 @@ export default {
     },
     employeeCode() {
       var check = this.$refs.employeeCode.value;
-      if (check == "") {
+      var checkRepeat = this.employeeCodeArray.includes(check);
+
+      if (check == "" || checkRepeat == true) {
         this.checkEmployeeCode = false;
       } else {
         this.checkEmployeeCode = true;
@@ -391,7 +398,6 @@ export default {
         if (this.statusForm == "add") {
           alert(this.employeeCodeDefault);
           if (this.$refs.employeeCode.value != "") {
-            
             alert("Bạn đang thêm mới Nhân Viên");
             axios
               .post("http://api.manhnv.net/v1/employees", this.employeeGet)
@@ -414,7 +420,6 @@ export default {
             alert("Bạn cần nhập đầy đủ thông tin bắt buộc");
           }
         } else {
-          alert("Ban dang Sua");
           axios
             .put(
               "http://api.manhnv.net/v1/employees/" +
@@ -422,13 +427,13 @@ export default {
               this.employeeGet
             )
             .then(() => {
-              alert("SUA THANH CONG");
+              alert("Bạn cập nhật thông tin thành công!");
               this.$emit("closeDialog");
               this.$emit("loadData");
             })
             .catch((res) => {
               console.log(res);
-              alert(" sua that bai");
+              alert("Cập nhật thất bại!");
             });
         }
       } else {
@@ -445,29 +450,27 @@ export default {
         axios
           .delete("http://api.manhnv.net/v1/employees/" + this.selectedEmployee)
           .then(() => {
-            alert("Xoa Thanh cong ");
+            alert("Xóa thành công!");
             this.$emit("closeDialog");
             this.$emit("loadData");
           })
           .catch(() => {
-            alert("Khong");
+            alert("Không thể xóa dữ liệu");
           });
       } else {
-        alert("Cam on ban");
+        alert("Bạn đã hủy việc Xóa!");
       }
     },
   },
   watch: {
     inputFocus() {
-      if(this.inputFocus==true){
+      if (this.inputFocus == true) {
         this.checkEmployeeCode = true;
-        this.$nextTick(() => this.$refs.employeeCode.focus())
-        
+        this.$nextTick(() => this.$refs.employeeCode.focus());
+        console.log(this.employeeCodeArray);
       }
-      
     },
   },
-  
 };
 </script>
 
