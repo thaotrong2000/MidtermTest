@@ -252,7 +252,7 @@ export default {
     trDoubleClick(customerId) {
       
       this.statusForm = "edit";
-      this.isShow = true;
+      // this.isShow = true;
       this.inputFocus = true;
       this.selectedEmployee = customerId;
       this.btnDelete = false;
@@ -266,7 +266,10 @@ export default {
           if(this.employeeCodeOld == null){
             this.isShow = false;
             alert("Thông tin hiện không tồn tại!");
-            
+            this.loadData();
+          }
+          else{
+            this.isShow = true;
           }
         })
         .catch((res) => {
