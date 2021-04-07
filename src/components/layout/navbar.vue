@@ -11,31 +11,31 @@
 
     <!-- Tao thanh Menu -->
     <div id="navbar-menu">
-      <router-link class="btn-menu"  to="/dashboard">
+      <router-link class="btn-menu btn-menu-dashboard"  to="/dashboard">
         <div class="btn-menu-icon btn-dashboard"></div>
         <div class="btn-menu-text ">Tổng quan</div>
       </router-link>
 
-      <router-link class="btn-menu" to="/report">
+      <router-link class="btn-menu btn-menu-report" to="/report">
         <div class="btn-menu-icon btn-report" ></div>
         <div class="btn-menu-text ">Báo cáo</div>
       </router-link>
 
-      <router-link class="btn-menu" to="/buy">
+      <router-link class="btn-menu btn-menu-buy" to="/buy">
         <div class="btn-menu-icon btn-buy" ></div>
         <div class="btn-menu-text ">Mua hàng</div>
       </router-link>
-      <router-link class="btn-menu" to="/employee">
+      <router-link class="btn-menu btn-menu-employee" to="/employee">
         <div class="btn-menu-icon btn-employee"></div>
         <div class="btn-menu-text ">Danh mục nhân viên</div>
       </router-link>
 
-      <router-link class="btn-menu" to="/customer">
+      <router-link class="btn-menu btn-menu-customer" to="/customer">
         <div class="btn-menu-icon btn-employee" ></div>
         <div class="btn-menu-text ">Danh mục khách hàng</div>
       </router-link>
 
-      <router-link class="btn-menu" to="/system">
+      <router-link class="btn-menu btn-menu-system" to="/system">
         <div class="btn-menu-icon btn-system" ></div>
         <div class="btn-menu-text ">Thiết lập hệ thống</div>
       </router-link>

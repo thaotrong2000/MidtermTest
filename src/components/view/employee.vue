@@ -114,12 +114,13 @@
       :btnDelete="btnDelete"
       :inputFocus="inputFocus"
       :employeeCodeDefault="employeeCodeDefault"
-      :employeeCodeArray ="employeeCodeArray"
+      :employeeCodeArray="employeeCodeArray"
     />
   </div>
 </template>
 
 <script>
+import $ from "jquery";
 import Dialog from "../layout/dialog";
 import axios from "axios";
 export default {
@@ -138,6 +139,8 @@ export default {
     };
   },
   created() {
+    // Test JQquery
+
     axios
       .get("http://api.manhnv.net/v1/employees")
       .then((res) => {
@@ -183,7 +186,7 @@ export default {
 
       //Set EmployeeCode
       var numberMax = this.employeeCodeDefault + 1;
-      this.employeeGet.EmployeeCode = "NV-"+numberMax;
+      this.employeeGet.EmployeeCode = "NV-" + numberMax;
 
       //
       this.btnDelete = true;
@@ -223,7 +226,7 @@ export default {
 
       // Loc du lieu (EmployeeCode) tu array employeeCodeArray
 
-      for (x = 0; x < this.employeeCodeArray.length; x++) {
+      for (x = 0; x <this.employeeCodeArray.length; x++) {
         var substring = this.employeeCodeArray[x].substring(0, 3);
         var regex = /NV-/;
         if (regex.test(substring) == true) {
@@ -259,5 +262,35 @@ export default {
         });
     },
   },
+  mounted() {
+    // $("#navbar-menu .btn-menu").on("click", function () {
+    //   $("#navbar-menu .btn-menu").css("background-color","#f4f4f4");
+    //   $("#navbar-menu .btn-menu").css("color","#000000");
+
+    //   $(this).css("background-color","#019160");
+    //   $(this).css("color","#ffffff");
+    // });
+
+    $(document).ready(function() {
+      $(".btn-menu").on("click", function() {
+        $(".btn-menu").css("background-color", "#f4f4f4");
+        $(".btn-menu").css("color", "#000000");
+
+        $(this).css("background-color", "#019160");
+        $(this).css("color", "#ffffff");
+
+        // $(".btn-menu").removeClass("button-btn-menu");
+        // $(this).addClass("button-btn-menu");
+      });
+    });
+  },
 };
 </script>
+
+<style>
+.button-btn-menu {
+  /* background-color: #019160; */
+  /* color: #ffffff; */
+  background-color: red;
+}
+</style>

@@ -396,8 +396,7 @@ export default {
         this.checkEmployeeTel == true
       ) {
         if (this.statusForm == "add") {
-          alert(this.employeeCodeDefault);
-          if (this.$refs.employeeCode.value != "") {
+          if (this.$refs.employeeCode.value != "" && this.$refs.employeeFullName.value) {
             alert("Bạn đang thêm mới Nhân Viên");
             axios
               .post("http://api.manhnv.net/v1/employees", this.employeeGet)
@@ -412,7 +411,7 @@ export default {
                 alert("Không thêm được dữ liệu");
               });
           } else {
-            this.checkEmployeeCode = false;
+            this.checkEmployeeCode = true;
             this.checkEmployeeFullName = false;
             this.checkEmployeeIdentityNumber = false;
             this.checkEmployeeEmail = false;

@@ -64,10 +64,10 @@
     background-color: #e5e5e5;
     color: #000000;
 }
-#navbar-menu .btn-menu:focus{
+/* #navbar-menu .btn-menu:focus{
     background-color: #019160; 
     color: #ffffff;
-}
+} */
 
 
 .btn-menu .btn-menu-icon{

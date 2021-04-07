@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
+// import jQuery from "jquery"
+// global.jQuery = jQuery
+// global.$ = jQuery
 
 
 
