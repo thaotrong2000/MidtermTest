@@ -115,6 +115,7 @@
       :inputFocus="inputFocus"
       :employeeCodeDefault="employeeCodeDefault"
       :employeeCodeArray="employeeCodeArray"
+      :employeeCodeOld = "employeeCodeOld"
     />
   </div>
 </template>
@@ -136,6 +137,7 @@ export default {
       employeeCodeArray: [],
       employeeCodeHeader: [],
       employeeCodeDefault: 0,
+      employeeCodeOld: ""
     };
   },
   created() {
@@ -186,7 +188,7 @@ export default {
 
       //Set EmployeeCode
       var numberMax = this.employeeCodeDefault + 1;
-      this.employeeGet.EmployeeCode = "NV-" + numberMax;
+      this.employeeGet.EmployeeCode = "NV" + numberMax;
 
       //
       this.btnDelete = true;
@@ -226,24 +228,29 @@ export default {
 
       // Loc du lieu (EmployeeCode) tu array employeeCodeArray
 
-      for (x = 0; x <this.employeeCodeArray.length; x++) {
-        var substring = this.employeeCodeArray[x].substring(0, 3);
-        var regex = /NV-/;
+      for (x = 0; x < this.employeeCodeArray.length; x++) {
+        var substring = this.employeeCodeArray[x].substring(0, 2);
+        var regex = /NV/;
         if (regex.test(substring) == true) {
-          var substringCode = this.employeeCodeArray[x].substring(3);
+          var substringCode = this.employeeCodeArray[x].substring(2);
           this.employeeCodeHeader.push(substringCode);
         }
       }
 
       console.log(this.employeeCodeHeader);
+      if (this.employeeCodeHeader.length == 0) {
+        this.employeeCodeDefault = 0;
+      } else {
+        var max_of_array = Math.max.apply(Math, this.employeeCodeHeader);
+        this.employeeCodeDefault = max_of_array;
+      }
 
-      var max_of_array = Math.max.apply(Math, this.employeeCodeHeader);
-      this.employeeCodeDefault = max_of_array;
       console.log(this.employeeCodeDefault);
     },
 
     // Hien thi thong tin cua Employee
     trDoubleClick(customerId) {
+      
       this.statusForm = "edit";
       this.isShow = true;
       this.inputFocus = true;
@@ -255,11 +262,19 @@ export default {
         .then((res) => {
           this.employeeGet = res.data;
           console.log(this.employeeGet);
+          this.employeeCodeOld = this.employeeGet.EmployeeCode;
+          if(this.employeeCodeOld == null){
+            this.isShow = false;
+            alert("Thông tin hiện không tồn tại!");
+            
+          }
         })
         .catch((res) => {
           console.log(res);
           alert("That bai");
         });
+        // Hien thi EmployeeCode ban dau
+        
     },
   },
   mounted() {

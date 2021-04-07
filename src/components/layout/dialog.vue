@@ -74,7 +74,6 @@
             <div class="dialog-input-label">
               <div class="dialog-input-text">Giới tính</div>
               <select class="dialog-input" v-model="employeeGet.Gender">
-                <option value="3"></option>
                 <option :selected="employeeGet.Gender == 1" value="1"
                   >Nam</option
                 >
@@ -84,6 +83,7 @@
                 <option :selected="employeeGet.Gender == 2" value="2"
                   >Không xác định</option
                 >
+                <option :selected="employeeGet.Gender == ''" value="3"></option>
               </select>
             </div>
           </div>
@@ -298,9 +298,12 @@ export default {
       type: Number,
       default: 0,
     },
-    employeeCodeArray:{
-      type: Array
-    }
+    employeeCodeArray: {
+      type: Array,
+    },
+    employeeCodeOld: {
+      type: String,
+    },
   },
 
   data() {
@@ -352,12 +355,20 @@ export default {
     employeeCode() {
       var check = this.$refs.employeeCode.value;
       var checkRepeat = this.employeeCodeArray.includes(check);
+      console.log(this.employeeCodeOld);
 
-      if (check == "" || checkRepeat == true) {
-        this.checkEmployeeCode = false;
-      } else {
+      console.log(this.$refs.employeeCode.value);
+      if (this.employeeCodeOld == this.$refs.employeeCode.value) {
         this.checkEmployeeCode = true;
+      } else {
+        if (check == "" || checkRepeat == true) {
+          this.checkEmployeeCode = false;
+        } else {
+          this.checkEmployeeCode = true;
+        }
       }
+
+      // Neu phan do la edit:
     },
     updateDateIdentityDate(x) {
       this.employeeGet.IdentityDate = x;
@@ -396,7 +407,10 @@ export default {
         this.checkEmployeeTel == true
       ) {
         if (this.statusForm == "add") {
-          if (this.$refs.employeeCode.value != "" && this.$refs.employeeFullName.value) {
+          if (
+            this.$refs.employeeCode.value != "" &&
+            this.$refs.employeeFullName.value
+          ) {
             alert("Bạn đang thêm mới Nhân Viên");
             axios
               .post("http://api.manhnv.net/v1/employees", this.employeeGet)
