@@ -64,8 +64,8 @@
             <td>{{ formatDateOfBirth(employee.DateOfBirth) }}</td>
             <td>{{ employee.PhoneNumber }}</td>
             <td>{{ employee.Email }}</td>
-            <td>Nhân viên Marketting</td>
-            <td>Phòng Marketting</td>
+            <td>{{ employee.PositionName }}</td>
+            <td>{{ employee.DepartmentName }}</td>
             <td>{{ formatMoney(employee.Salary) }}</td>
             <td>{{ employee.WorkStatus }}</td>
           </tr>
@@ -261,6 +261,7 @@ export default {
         .get("http://api.manhnv.net/v1/employees/" + customerId)
         .then((res) => {
           this.employeeGet = res.data;
+          console.log(res);
           console.log(this.employeeGet);
           this.employeeCodeOld = this.employeeGet.EmployeeCode;
           if(this.employeeCodeOld == null){

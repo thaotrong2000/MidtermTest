@@ -184,20 +184,49 @@
           <div class="dialog-information">
             <div class="dialog-input-label">
               <div class="dialog-input-text">Vị trí</div>
-              <input
+              <!-- <input
                 type="text"
                 class="dialog-input"
-                v-model="employeeGet.PositionName"
-              />
+                v-model="employeeGet.PositionCode"
+              /> -->
+              <select class="dialog-input" v-model="employeeGet.PositionId">
+                <option :selected="employeeGet.PositionId == '148ed882-32b8-218e-9c20-39c2f00615e8'" value="148ed882-32b8-218e-9c20-39c2f00615e8"
+                  >Nhân viên Marketting</option
+                >
+                <option :selected="employeeGet.PositionId == '3700cc49-55b5-69ea-4929-a2925c0f334d'" value="3700cc49-55b5-69ea-4929-a2925c0f334d"
+                  >Giám đốc</option
+                >
+                <option :selected="employeeGet.PositionId == '25c6c36e-1668-7d10-6e09-bf1378b8dc91'" value="25c6c36e-1668-7d10-6e09-bf1378b8dc91"
+                  >Thu ngân</option
+                >
+              </select>
+              
             </div>
             <!-- Right -->
             <div class="dialog-input-label">
               <div class="dialog-input-text">Phòng ban</div>
-              <input
+              <!-- <input
                 type="text"
                 class="dialog-input"
-                v-model="employeeGet.DepartmentName"
-              />
+                v-model="employeeGet.DepartmentCode"
+              /> -->
+              <!-- <input
+                type="text"
+                class="dialog-input"
+                v-model="employeeGet.DepartmentId"
+              /> -->
+
+              <select class="dialog-input" v-model="employeeGet.DepartmentId">
+                <option :selected="employeeGet.DepartmentId == '4e272fc4-7875-78d6-7d32-6a1673ffca7c'" value="4e272fc4-7875-78d6-7d32-6a1673ffca7c"
+                  >Phòng công nghệ</option
+                >
+                <option :selected="employeeGet.DepartmentId == '17120d02-6ab5-3e43-18cb-66948daf6128'" value="17120d02-6ab5-3e43-18cb-66948daf6128"
+                  >Phòng đào tạo</option
+                >
+                <option :selected="employeeGet.DepartmentId == '469b3ece-744a-45d5-957d-e8c757976496'" value="469b3ece-744a-45d5-957d-e8c757976496"
+                  >Phòng nhân sự</option
+                >
+              </select>
             </div>
           </div>
 
